@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     {
         rigidbody.velocity = new Vector2(-1, rigidbody.velocity.y);
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Ha salido de la colisión");
     }
