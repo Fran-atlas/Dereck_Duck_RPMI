@@ -5,21 +5,34 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] float enemySpeed = -1f;
-    Rigidbody2D rigidbody;
+    Rigidbody2D newrigidbody;
 
-    // Start is called before the first frame update
+ 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        newrigidbody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
+  
     void Update()
     {
-        rigidbody.velocity = new Vector2(-1, rigidbody.velocity.y);
+        if (isFacingLeft())
+        {
+            newrigidbody.velocity = new Vector2(enemySpeed, newrigidbody.velocity.y);
+        }
+        else
+        {
+            newrigidbody.velocity = new Vector2(-enemySpeed, newrigidbody.velocity.y);
+        }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    bool isFacingLeft()
     {
-        Debug.Log("Ha salido de la colisión");
+        return transform.localScale.x > 0;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        transform.localScale = new Vector2(newrigidbody.velocity.x, transform.localScale.y);
     }
 }
