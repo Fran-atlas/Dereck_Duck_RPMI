@@ -2810,6 +2810,7 @@ GameObject:
   m_Component:
   - component: {fileID: 364272016}
   - component: {fileID: 364272015}
+  - component: {fileID: 364272017}
   m_Layer: 0
   m_Name: Enemy (3)
   m_TagString: Untagged
@@ -2884,6 +2885,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &364272017
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364272014}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb6c2ef2895a2d2468feee97ae3c107c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &430308543
 GameObject:
   m_ObjectHideFlags: 0
@@ -2894,6 +2916,7 @@ GameObject:
   m_Component:
   - component: {fileID: 430308545}
   - component: {fileID: 430308544}
+  - component: {fileID: 430308546}
   m_Layer: 0
   m_Name: Enemy (2)
   m_TagString: Untagged
@@ -2968,6 +2991,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &430308546
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430308543}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2ffb72dfa61e52149a44e7b8872cffef, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &594439029
 GameObject:
   m_ObjectHideFlags: 0
@@ -6209,7 +6253,7 @@ SceneRoots:
   - {fileID: 430308545}
   - {fileID: 364272016}
   - {fileID: 1900761950}
-  - {fileID: 1390997695}
   - {fileID: 1578782897}
+  - {fileID: 1390997695}
   - {fileID: 1970421112}
   - {fileID: 1554258862}
