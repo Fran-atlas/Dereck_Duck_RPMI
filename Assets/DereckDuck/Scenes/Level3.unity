@@ -195,7 +195,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 13
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -802,8 +802,8 @@ Transform:
   m_GameObject: {fileID: 576922334}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.64, y: -2.87, z: 0}
-  m_LocalScale: {x: 5.529186, y: 5.529186, z: 5.529186}
+  m_LocalPosition: {x: -7.89, y: -3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -840,18 +840,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.16}
+  m_Offset: {x: 0.014296532, y: 0.5790323}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 0.4363985, y: 1.1689456}
   m_EdgeRadius: 0
 --- !u!50 &576922340
 Rigidbody2D:
@@ -913,11 +913,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6230400268015394795, guid: 7c5182f6b0a2645429d4857f8e0e5c57, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.71
+      value: -3.91
       objectReference: {fileID: 0}
     - target: {fileID: 6230400268015394795, guid: 7c5182f6b0a2645429d4857f8e0e5c57, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.68
+      value: 1.06
       objectReference: {fileID: 0}
     - target: {fileID: 6230400268015394795, guid: 7c5182f6b0a2645429d4857f8e0e5c57, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5104,7 +5104,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -1765550589, guid: 55b1a45a676a4df4fa4094bccf0a1a35, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5125,8 +5125,8 @@ Transform:
   m_GameObject: {fileID: 1443160448}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.19, z: 0}
-  m_LocalScale: {x: 12.561337, y: 12.561337, z: 12.561337}
+  m_LocalPosition: {x: 0, y: -5.28, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
