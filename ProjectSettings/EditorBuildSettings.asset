@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/DereckDuck/Scenes/MainMenu.unity
+    guid: efc3edf715c7fd1419a2b9d96ecc3356
+  - enabled: 1
+    path: Assets/DereckDuck/Scenes/Level1.unity
+    guid: 60be623faa440c2428c9137990d3a1c1
+  - enabled: 1
     path: Assets/DereckDuck/Scenes/Level3.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   m_configObjects: {}
