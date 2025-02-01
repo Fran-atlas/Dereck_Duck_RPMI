@@ -5060,4 +5060,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 7136376746908692046, guid: 532d5795cd5be324db8eba9b91f73b68, type: 3}
-  objectiveTag: Boss
+  objectiveTag: BossHead

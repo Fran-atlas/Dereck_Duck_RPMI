@@ -16,7 +16,7 @@ public class SceneChanger : MonoBehaviour
         }
         else
         {
-            Debug.LogError("No se ha asignado un botón en el Inspector");
+            Debug.LogWarning("No se ha asignado un botón en el Inspector");
         }
     }
 
@@ -28,7 +28,7 @@ public class SceneChanger : MonoBehaviour
         }
         else
         {
-            Debug.LogError("No se ha asignado un nombre de escena en el Inspector");
+            Debug.LogWarning("No se ha asignado un nombre de escena en el Inspector");
         }
     }
 

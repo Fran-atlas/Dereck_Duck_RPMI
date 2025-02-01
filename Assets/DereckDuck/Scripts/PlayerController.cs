@@ -1,9 +1,10 @@
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
+
     // --- COMPONENTES ---
     [Header("Componentes")]
     private Rigidbody2D rb;
@@ -43,12 +44,16 @@ public class PlayerController : MonoBehaviour
 
     [Header("Vida")]
     [SerializeField] private int hp = 4;
-    [SerializeField] private int mana = 5;
 
     [Header("Invencibilidad")]
-    [SerializeField] private float invincibilityDuration = 1.5f; // Tiempo de invencibilidad tras recibir daño
+    [SerializeField] private float invincibilityDuration = 1.5f;
     private bool isInvincible;
     private float invincibilityTimer;
+
+    [Header("Mana")]
+    [SerializeField] private int mana = 5;
+    [SerializeField] private float manaRechargeTime = 5f;
+    private float manaRechargeTimer;
 
     [Header("UI")]
     [SerializeField] private PointsBarUI hpBar;
@@ -61,15 +66,26 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         sp = GetComponent<SpriteRenderer>();
         tr = GetComponent<Transform>();
+        manaRechargeTimer = manaRechargeTime;
     }
 
-    void Update()
+void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(GroundCheck.transform.position, 0.1f, groundLayer); //Posición en la que se va a dibujar el círculo.
-        Movement();
-        JumpLogic();
-        AttackLogic();
-        HandleInvincibility();
+        if (hp <= 0)
+        {
+            HandleDead();
+            return;
+        }
+
+        if (!gameManager.pause)
+        {   
+            isGrounded = Physics2D.OverlapCircle(GroundCheck.transform.position, 0.1f, groundLayer);
+            Movement();
+            JumpLogic();
+            AttackLogic();
+            HandleInvincibility();
+            HandleManaRecharge();
+        }
     }
 
     void Movement()
@@ -136,7 +152,7 @@ public class PlayerController : MonoBehaviour
             attackCdTimer -= Time.deltaTime; 
         }
 
-        if (Input.GetKeyDown(KeyCode.J) && attackCdTimer <= 0)
+        if (Input.GetKeyDown(KeyCode.J) && attackCdTimer <= 0 && mana > 0)
         {
             anim.SetTrigger("IsAttacking");
             attackCdTimer = attackCd;
@@ -164,7 +180,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("BossProyectile") && !isInvincible)
+        if ((collision.CompareTag("BossProyectile") || collision.CompareTag("GroundFire")) && !isInvincible)
         {
             TakeDamage();
         }
@@ -175,15 +191,10 @@ public class PlayerController : MonoBehaviour
         hp--;
         hp = Mathf.Max(hp, 0);
         hpBar.UpdatePoints(hp);
-        Debug.LogWarning($"Player hit! HP = {hp}");
 
         if (hp > 0)
         {
             StartInvincibility();
-        }
-        else
-        {
-            Debug.Log("Game Over");
         }
     }
 
@@ -216,5 +227,26 @@ public class PlayerController : MonoBehaviour
             sp.color = Color.white;
             yield return new WaitForSeconds(0.15f);
         }
+    }
+
+    void HandleManaRecharge()
+    {
+        if (mana < 5)
+        {
+            manaRechargeTimer -= Time.deltaTime;
+
+            if (manaRechargeTimer <= 0)
+            {
+                mana++; // Recargar 1 de mana
+                manaBar.UpdatePoints(mana); // Actualizar UI
+                manaRechargeTimer = manaRechargeTime; // Reiniciar temporizador
+            }
+        }
+    }
+
+    void HandleDead()
+    {
+        anim.SetBool("IsDead", true);
+        gameManager.GameOver();
     }
 }

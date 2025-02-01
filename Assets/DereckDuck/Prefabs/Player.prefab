@@ -257,6 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2124b3243ab7cb8489c8c4550ed07440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   speed: 8
   threshold: 0.2
   GroundCheck: {fileID: 1649431170051353236}
@@ -264,11 +265,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   jumpForce: 18
-  coyoteEnable: 1
   coyoteTime: 0.15
-  queueEnable: 1
   queueTime: 0.1
-  attackCd: 1.1
-  proyectilePrefab: {fileID: 0}
+  attackCd: 2
+  proyectilePrefab: {fileID: 2236897464118322745, guid: 9ae7ccb2351c56849a203cdae5fd21ee, type: 3}
   proyectileSpeed: 10
   shootingPoint: {fileID: 919374633310899049}
+  hp: 4
+  invincibilityDuration: 3
+  mana: 5
+  manaRechargeTime: 10
+  hpBar: {fileID: 0}
+  manaBar: {fileID: 0}

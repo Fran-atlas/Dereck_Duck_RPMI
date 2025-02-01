@@ -6,7 +6,7 @@ using UnityEngine;
 public class Proyectile : MonoBehaviour
 {
 
-    [SerializeField] private ParticleSystem particleSystem;
+    [SerializeField] private new ParticleSystem particleSystem;
     [SerializeField] private string objectiveTag;
 
     private void OnTriggerEnter2D(Collider2D collision)

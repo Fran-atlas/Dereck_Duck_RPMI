@@ -10,6 +10,8 @@ TagManager:
   - PlayerProyectile
   - Boss
   - BossProyectile
+  - BossHead
+  - GroundFire
   layers:
   - Default
   - TransparentFX

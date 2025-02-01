@@ -738,7 +738,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Level1
   startButton: {fileID: 1504296201}
-  exitButton: {fileID: 0}
+  exitButton: {fileID: 2032711123}
 --- !u!4 &1538514673
 Transform:
   m_ObjectHideFlags: 0
