@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float enemySpeed = -1f;
     Rigidbody2D newrigidbody;
 
+
  
     void Start()
     {
