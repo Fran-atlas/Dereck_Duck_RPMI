@@ -1,3 +1,5 @@
+using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -7,12 +9,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sp;
+    private Transform tr;
 
     // --- MOVIMIENTO ---
     [Header("Movimiento")]
     [SerializeField] private float speed;
     [SerializeField] private float threshold;
     private float horizontalInput;
+    private bool isLookingLeft;
 
     // --- SALTO ---
     [Header("Salto")]
@@ -22,25 +26,41 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce;
 
     [Header("Coyote Time")]
-    [SerializeField] private bool coyoteEnable = true;
     [SerializeField] private float coyoteTime = 0.2f;
     private float coyoteTimer;
 
     [Header("Jump Queue")]
-    [SerializeField] private bool queueEnable = true;
     [SerializeField] private float queueTime = 0.2f;
     private float queueTimer;
 
+    // --- ATAQUE ---
     [Header("Ataque")]
     [SerializeField] private float attackCd = 1.1f;
     private float attackCdTimer;
-    [SerializeField] private int attackDmg = 1;
+    [SerializeField] private GameObject proyectilePrefab;
+    [SerializeField] private float proyectileSpeed = 10f;
+    [SerializeField] private Transform shootingPoint;
+
+    [Header("Vida")]
+    [SerializeField] private int hp = 4;
+    [SerializeField] private int mana = 5;
+
+    [Header("Invencibilidad")]
+    [SerializeField] private float invincibilityDuration = 1.5f; // Tiempo de invencibilidad tras recibir daño
+    private bool isInvincible;
+    private float invincibilityTimer;
+
+    [Header("UI")]
+    [SerializeField] private PointsBarUI hpBar;
+    [SerializeField] private PointsBarUI manaBar;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sp = GetComponent<SpriteRenderer>();
+        tr = GetComponent<Transform>();
     }
 
     void Update()
@@ -49,6 +69,7 @@ public class PlayerController : MonoBehaviour
         Movement();
         JumpLogic();
         AttackLogic();
+        HandleInvincibility();
     }
 
     void Movement()
@@ -63,7 +84,8 @@ public class PlayerController : MonoBehaviour
         //Sprite
         if(horizontal != 0)
         {
-            sp.flipX = horizontal < 0;
+            isLookingLeft = horizontal < 0;
+            sp.flipX = isLookingLeft;
         }
 
         //Animación
@@ -78,37 +100,35 @@ public class PlayerController : MonoBehaviour
 
     void JumpLogic()
     {
-        // Actualizar animación de salto
         anim.SetBool("IsJumping", !isGrounded);
 
-        // Manejo de Coyote Time
+        
         if (isGrounded)
         {
-            coyoteTimer = coyoteTime; // Resetear coyote time cuando toca el suelo
+            coyoteTimer = coyoteTime;
         }
         else
         {
-            coyoteTimer -= Time.deltaTime; // Reducir el tiempo de gracia cuando está en el aire
+            coyoteTimer -= Time.deltaTime;
         }
 
-        // Manejo de Jump Queue (Cola de salto)
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            queueTimer = queueTime; // Si presiona salto, almacenar el tiempo de espera
+            queueTimer = queueTime;
         }
         else
         {
-            queueTimer -= Time.deltaTime; // Reducir el tiempo de espera del salto
+            queueTimer -= Time.deltaTime;
         }
 
-        // Ejecutar el salto si está permitido por Coyote Time o Jump Queue
         if (queueTimer > 0 && coyoteTimer > 0)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce); // Aplicar salto
-            queueTimer = 0; // Resetear la cola de salto para evitar saltos dobles
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            queueTimer = 0;
         }
     }
-    //<>
+    
     void AttackLogic()
     {
         if (attackCdTimer > 0)
@@ -120,7 +140,81 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetTrigger("IsAttacking");
             attackCdTimer = attackCd;
+            Shoot();
+            mana--;
+            manaBar.UpdatePoints(mana);
         }
 
+    }
+
+    void Shoot()
+    {
+        GameObject proyectile = Instantiate(proyectilePrefab, shootingPoint.position, Quaternion.identity);
+
+        Rigidbody2D proyectileRb = proyectile.GetComponent<Rigidbody2D>();
+        SpriteRenderer proyectileSp = proyectile.GetComponent<SpriteRenderer>();
+
+        if (proyectileRb != null)
+        {
+            float direction = isLookingLeft ? -1f : 1f;
+            proyectileSp.flipX = isLookingLeft;
+            proyectileRb.velocity = new Vector2(direction * proyectileSpeed, 0);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("BossProyectile") && !isInvincible)
+        {
+            TakeDamage();
+        }
+    }
+
+    void TakeDamage()
+    {
+        hp--;
+        hp = Mathf.Max(hp, 0);
+        hpBar.UpdatePoints(hp);
+        Debug.LogWarning($"Player hit! HP = {hp}");
+
+        if (hp > 0)
+        {
+            StartInvincibility();
+        }
+        else
+        {
+            Debug.Log("Game Over");
+        }
+    }
+
+    void StartInvincibility()
+    {
+        isInvincible = true;
+        invincibilityTimer = invincibilityDuration;
+        StartCoroutine(BlinkEffect());
+    }
+
+    void HandleInvincibility()
+    {
+        if (isInvincible)
+        {
+            invincibilityTimer -= Time.deltaTime;
+            if (invincibilityTimer <= 0)
+            {
+                isInvincible = false;
+                sp.color = Color.white; // Restaurar color normal
+            }
+        }
+    }
+
+    IEnumerator BlinkEffect()
+    {
+        while (isInvincible)
+        {
+            sp.color = new Color(1, 1, 1, 0.5f); // Semi-transparente
+            yield return new WaitForSeconds(0.15f);
+            sp.color = Color.white;
+            yield return new WaitForSeconds(0.15f);
+        }
     }
 }
