@@ -32,8 +32,8 @@ public class Enemy : MonoBehaviour
         return transform.localScale.x > 0;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        transform.localScale = new Vector2(newrigidbody.velocity.x, transform.localScale.y);
-    }
+   // private void OnTriggerExit2D(Collider2D collision)
+  //  {
+  //      transform.localScale = new Vector2(newrigidbody.velocity.x, transform.localScale.y);
+  //  }
 }
