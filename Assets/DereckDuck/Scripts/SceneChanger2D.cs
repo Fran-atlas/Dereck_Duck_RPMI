@@ -31,6 +31,10 @@ public class SceneChanger : MonoBehaviour
             Debug.LogWarning("No se ha asignado un nombre de escena en el Inspector");
         }
     }
+    public void ExitGame()
+    {
+        Application.Quit(); //Salir de la aplicación, cierra el juego completamente
+    }
 
 
 }
