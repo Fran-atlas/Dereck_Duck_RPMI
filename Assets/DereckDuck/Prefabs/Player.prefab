@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 454825587919400500}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5836152929010389315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 919374633310899049}
+  m_Layer: 0
+  m_Name: ShootingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &919374633310899049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5836152929010389315}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.55, y: 0.54, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 454825587919400500}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7160524881457632989
 GameObject:
   m_ObjectHideFlags: 0
@@ -66,6 +97,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1331946088578312841}
+  - {fileID: 919374633310899049}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8875580913714483798
@@ -225,6 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2124b3243ab7cb8489c8c4550ed07440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   speed: 8
   threshold: 0.2
   GroundCheck: {fileID: 1649431170051353236}
@@ -232,9 +265,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   jumpForce: 18
-  coyoteEnable: 1
   coyoteTime: 0.15
-  queueEnable: 1
   queueTime: 0.1
-  attackCd: 1.1
-  attackDmg: 1
+  attackCd: 2
+  proyectilePrefab: {fileID: 2236897464118322745, guid: 9ae7ccb2351c56849a203cdae5fd21ee, type: 3}
+  proyectileSpeed: 10
+  shootingPoint: {fileID: 919374633310899049}
+  hp: 4
+  invincibilityDuration: 3
+  mana: 5
+  manaRechargeTime: 10
+  hpBar: {fileID: 0}
+  manaBar: {fileID: 0}

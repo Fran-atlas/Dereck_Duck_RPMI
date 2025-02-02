@@ -7,6 +7,11 @@ TagManager:
   - Enemy
   - Ground
   - PickUp
+  - PlayerProyectile
+  - Boss
+  - BossProyectile
+  - BossHead
+  - GroundFire
   layers:
   - Default
   - TransparentFX
