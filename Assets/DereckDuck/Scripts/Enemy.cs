@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("DereckProyectile"))
+        if (collision.gameObject.CompareTag("PlayerProyectile"))
         {
             gameObject.SetActive(false);
         }
